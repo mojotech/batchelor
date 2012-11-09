@@ -8,6 +8,16 @@ describe TestModel do
       it 'can use find_in_batches' do
         lambda { TestModel.find_in_batches }.should_not raise_exception
       end
+
+      it 'finds records' do
+        records_found = false
+
+        TestModel.find_in_batches do |records|
+          records_found = true unless records.empty?
+        end
+
+        records_found.should be_true
+      end
     end
 
     describe '::find_each' do
