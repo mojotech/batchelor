@@ -64,7 +64,25 @@ describe TestModel do
     end
 
     describe '::find_each' do
+      it 'can use find_each' do
+        lambda { TestModel.find_each {} }.should_not raise_exception
+      end
 
+      it 'finds in batches but the object yielded to the block is a single record' do
+        TestModel.find_each do |record|
+          record.should be_a(TestModel)
+        end
+      end
+
+      it 'finds functions just like each but using find_in_batches' do
+        records_count = 0
+
+        TestModel.find_each do |record|
+          records_count += 1
+        end
+
+        records_count.should == num_records
+      end
     end
   end
 end

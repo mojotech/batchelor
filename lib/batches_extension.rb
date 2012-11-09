@@ -19,4 +19,12 @@ module BatchesExtension
       num_offset += records.count
     end
   end
+
+  def find_each(opts={})
+    return unless block_given?
+
+    find_in_batches(opts) do |records|
+      records.each { |record| yield(record) }
+    end
+  end
 end
