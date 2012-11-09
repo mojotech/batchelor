@@ -6,7 +6,7 @@ describe TestModel do
   context 'BatchesExtender' do
     describe '::find_in_batches' do
       it 'can use find_in_batches' do
-        TestModel.find_in_batches {}.should_not raise_exception
+        lambda { TestModel.find_in_batches }.should_not raise_exception
       end
     end
 
