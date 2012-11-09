@@ -36,3 +36,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+def load_test_models
+  100.times do
+    TestModel.create(:primary_key => SecureRandom.base64)
+  end
+end
