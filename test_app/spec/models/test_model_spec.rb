@@ -4,6 +4,8 @@ describe TestModel do
   load_test_models
 
   context 'BatchesExtender' do
+    let(:num_records) { TestModel.count }
+
     describe '::find_in_batches' do
       it 'can use find_in_batches' do
         lambda { TestModel.find_in_batches }.should_not raise_exception
@@ -20,7 +22,6 @@ describe TestModel do
       end
 
       it 'finds records in batches' do
-        num_records = TestModel.count
         num_itterations = 0
 
         (1..10).each do |batch_size|
@@ -47,6 +48,18 @@ describe TestModel do
         TestModel.find_in_batches(:select => '1 as test_value') do |records|
           records.first.test_value.to_i.should == 1
         end
+      end
+
+      it 'can use the relation joins method' do
+        total_join_records = num_records * (num_records - 1)
+        records_count = 0
+        joins = 'INNER JOIN test_models AS tm ON test_models.primary_key != tm.primary_key'
+
+        TestModel.find_in_batches(:joins => joins) do |records|
+          records_count += records.count
+        end
+
+        records_count.should == total_join_records
       end
     end
 

@@ -5,6 +5,7 @@ module BatchesExtension
 
     relation = self.order(self.primary_key).limit(opts[:batch_size])
     relation = relation.select(opts[:select]) if opts[:select]
+    relation = relation.joins(opts[:joins]) if opts[:joins]
 
     while (records = relation.offset(num_offset).all).any?
       yield(records)
