@@ -1,4 +1,4 @@
-module BatchesExtension
+module Batchelor
   def find_in_batches(opts={})
     return unless block_given?
     batch_size = opts.delete(:batch_size) || 1000

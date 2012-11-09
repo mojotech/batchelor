@@ -1,7 +1,7 @@
 PATH
   remote: ../
   specs:
-    batches_extension (1.0.0)
+    batchelor (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -102,7 +102,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  batches_extension!
+  batchelor!
   pg
   rails (= 3.2.8)
   rspec-rails
