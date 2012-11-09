@@ -42,6 +42,12 @@ describe TestModel do
           num_itterations = 0
         end
       end
+
+      it 'can use a custom select' do
+        TestModel.find_in_batches(:select => '1 as test_value') do |records|
+          records.first.test_value.to_i.should == 1
+        end
+      end
     end
 
     describe '::find_each' do
