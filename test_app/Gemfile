@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+gem 'rails', '3.2.8'
+gem 'pg'
+
+group :test do
+  gem 'rspec-rails'
+end
+
+# To use debugger
+# gem 'debugger'
